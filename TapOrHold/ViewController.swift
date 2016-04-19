@@ -9,17 +9,51 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var tapOrHold: UIButton!
+    
+    @IBOutlet weak var counterLabel: UILabel!
+    
+    var counterNumbers : Int = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        counterLabel.text = "0"
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    func longPressAction() {
+        print("did long press")
+    }
+    
+    @IBAction func tapOrHoldButton(sender: AnyObject) {
+        
+        let lpg = UILongPressGestureRecognizer(target: self, action: "longPressAction")
+        lpg.minimumPressDuration = 2
+        
+        self.counterNumbers++
+        self.counterLabel.text = String(self.counterNumbers)
+        tapOrHold.addGestureRecognizer(lpg)
+        
+        
+        
+        
+        
+        
+    }
+    
+    @IBAction func resetButton(sender: UIBarButtonItem) {
+        
+        self.counterNumbers = 0
+        self.counterLabel.text = String(self.counterNumbers)
+    }
 }
 
